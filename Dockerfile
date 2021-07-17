@@ -1,11 +1,5 @@
-# 模拟安装阶段
-FROM alpine as install
-
-WORKDIR /install
-
-RUN apk add curl \
-            bash \
-    && curl https://rclone.org/install.sh | bash
+# 选取官方镜像
+FROM rclone/rclone as install
 
 # 包转移截断
 FROM alpine
