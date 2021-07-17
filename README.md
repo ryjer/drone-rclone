@@ -1,5 +1,6 @@
 # drone-rclone
 ![buildx](https://github.com/ryjer/drone-rclone/workflows/buildx/badge.svg)
+![buildx](https://github.com/ryjer/drone-rclone/workflows/build-conf/badge.svg)
 [![Docker Stars](https://img.shields.io/docker/stars/ryjer/drone-rclone.svg)](https://hub.docker.com/r/ryjer/drone-rclone/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/ryjer/drone-rclone.svg)](https://hub.docker.com/r/ryjer/drone-rclone/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
