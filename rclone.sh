@@ -16,17 +16,17 @@ bucket=${PLUGIN_BUCKET}
 source=${PLUGIN_SOURCE}
 target=${PLUGIN_TARGET}
 # 调试信息
-echo "环境变量抽取信息"、
-echo "subcommand = ${PLUGIN_SUBCOMMAND}"
-echo "name = ${PLUGIN_NAME}"
-echo "type= ${PLUGIN_TYPE}"
-echo "provider = ${PLUGIN_PROVIDER}"
-echo "access_key_id = ${PLUGIN_ACCESS_KEY_ID}"
-echo "secret_access_key = ${PLUGIN_SECRET_ACCESS_KEY}"
-echo "endpoint = ${PLUGIN_ENDPOINT}"
-echo "bucket = ${PLUGIN_BUCKET}"
-echo "source = ${PLUGIN_SOURCE}"
-echo "target = ${PLUGIN_TARGET}"
+#echo "环境变量抽取信息"、
+#echo "subcommand = ${PLUGIN_SUBCOMMAND}"
+#echo "name = ${PLUGIN_NAME}"
+#echo "type= ${PLUGIN_TYPE}"
+#echo "provider = ${PLUGIN_PROVIDER}"
+#echo "access_key_id = ${PLUGIN_ACCESS_KEY_ID}"
+#echo "secret_access_key = ${PLUGIN_SECRET_ACCESS_KEY}"
+#echo "endpoint = ${PLUGIN_ENDPOINT}"
+#echo "bucket = ${PLUGIN_BUCKET}"
+#echo "source = ${PLUGIN_SOURCE}"
+#echo "target = ${PLUGIN_TARGET}"
 
 #向配置文件中注入配置
 echo "[${name}]" > ${config_file}
@@ -36,8 +36,8 @@ echo "access_key_id = ${access_key_id}" >> ${config_file}
 echo "secret_access_key = ${secret_access_key}" >> ${config_file}
 echo "endpoint = ${endpoint}" >> ${config_file}
 # 调试信息
-echo "配置文件信息："
-cat ${config_file}
+#echo "配置文件信息："
+#cat ${config_file}
 
 # 执行 rclone 命令
 rclone --config ${config_file} ${subcommand} \
