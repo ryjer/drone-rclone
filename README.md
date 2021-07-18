@@ -252,7 +252,7 @@ steps:
     target: /
 ```
 
-该示例使用了 `secret`，考虑到一条 rclone 配置中有大量的敏感信息，这里强烈建议使用 `secret`。这需要创建如下所示的包含整条 rclone 配置的 secret。
+该示例使用了 `secret`，考虑到一条 rclone 配置中有大量的敏感信息，这里强烈建议使用 `secret`。这需要创建如下所示的包含整条 rclone 配置的多行（>= 6 行） secret。
 
 ![add rclone_conf Secret](https://raw.githubusercontent.com/ryjer/drone-rclone/main/images/20210718185028-drone-rclone-conf-secret.png)
 
