@@ -1,5 +1,5 @@
 # 选取官方镜像
-FROM rclone/rclone:1.53.4 as install
+FROM rclone/rclone:1.52.3 as install
 
 # 包转移截断
 FROM alpine:latest
