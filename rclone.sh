@@ -16,6 +16,21 @@ bucket=${PLUGIN_BUCKET}
 source=${PLUGIN_SOURCE}
 target=${PLUGIN_TARGET}
 
+#向配置文件中注入配置
+echo "环境变量 XDG_CONFIG_HOME=${XDG_CONFIG_HOME}"
+echo "根目录信息："
+ls -a /
+#touch ${config_file}
+echo "创建配置目录后："
+ls ${XDG_CONFIG_HOME}
+echo "向配置文件注入配置"
+echo "[${name}]" > ${config_file}
+echo "type = ${type}" >> ${config_file}
+echo "provider = ${provider}" >> ${config_file}
+echo "access_key_id = ${access_key_id}" >> ${config_file}
+echo "secret_access_key = ${secret_access_key}" >> ${config_file}
+echo "endpoint = ${endpoint}" >> ${config_file}
+
 # 执行 rclone 命令
 rclone --config ${config_file} ${subcommand} \
    ${PWD}${source}    ${name}:${bucket}${target} -P
