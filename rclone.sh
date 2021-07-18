@@ -25,5 +25,6 @@ echo "secret_access_key = ${secret_access_key}" >> ${config_file}
 echo "endpoint = ${endpoint}" >> ${config_file}
 
 # 执行 rclone 命令
+echo "======== ======== rclone 开始 ======== ========"
 rclone --config ${config_file} ${subcommand} \
    ${PWD}${source}    ${name}:${bucket}${target} -P

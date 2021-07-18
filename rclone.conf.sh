@@ -26,6 +26,7 @@ echo "${rclone_config}" > ${config_file}
 name=$(sed -n '1s/\[//; 1s/\]//; 1p' ${config_file})
 
 # 执行 rclone 命令，以当前工作目录为根目录
+echo "======== ======== rclone 开始 ======== ========"
 rclone --config ${config_file} ${subcommand} \
     ${PWD}${source}    ${name}:${bucket}${target} -P
 
