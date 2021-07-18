@@ -2,7 +2,7 @@
 set -e
 
 # 全局配置
-config_file='/config/rclone/rclone.conf'
+config_file='/config/rclone.conf'
 
 # 抽取参数，转换为本地参数名
 subcommand=${PLUGIN_SUBCOMMAND}
