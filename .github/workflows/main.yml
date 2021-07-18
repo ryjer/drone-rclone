@@ -49,8 +49,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ryjer/drone-rclone:1.52.3
-            ryjer/drone-rclone:1.52
+            ryjer/drone-rclone:latest
       # 同步 dockerhub README.md 文件
       - name: Sync
         uses: ms-jpq/sync-dockerhub-readme@v1
