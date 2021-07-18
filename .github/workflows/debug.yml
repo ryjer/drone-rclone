@@ -1,10 +1,10 @@
-name: 'buildx'
+name: 'debug'
 on:
   push:
     branches: [ main ]
     paths:
-    - Dockerfile
-    - rclone.sh
+    - Dockerfile.dbg
+    - rclone.dbg.sh
   pull_request:
     branches: [ main ]
 
