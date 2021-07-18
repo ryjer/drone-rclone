@@ -31,8 +31,9 @@ echo "target = ${target}"
 #向配置文件中注入配置
 echo "环境变量 XDG_CONFIG_HOME=${XDG_CONFIG_HOME}"
 ls -a /
-ls ${XDG_CONFIG_HOME}
 touch ${config_file}
+echo "创建配置目录后："
+ls ${XDG_CONFIG_HOME}
 echo "[${name}]" > ${config_file}
 echo "type = ${type}" >> ${config_file}
 echo "provider = ${provider}" >> ${config_file}
