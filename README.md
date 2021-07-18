@@ -9,9 +9,9 @@ Drone plugin to upload, remove and sync filesystems and object storage by rclone
 
 用于对文件系统和对象存储进行上传、删除和同步等操作的drone rclone插件
 
+# 1. 通用参数版本
 
-
-# 用法
+##  1.1 用法示例
 
 本插件用于在 Drone CI 中使用 rclone 工具。你可以使用本插件将文件推送到远端的网盘、网络存储或对象存储（比如 AWS S3、Minio、阿里 OSS、腾讯 COS 等）中。
 
@@ -19,7 +19,7 @@ Drone plugin to upload, remove and sync filesystems and object storage by rclone
 
 如果你希望本插件支持更多的 子命令功能，可以提交 Issues。
 
-## sync 同步示例
+### 1 sync 同步示例
 
 以下示例用于将由 git 仓库中刚刚生成的 `/public/` 文件夹同步（`sync`）到远端的 minio 对象存储的 `website-107893044`存储桶根路径（`/`）下。
 
@@ -65,7 +65,7 @@ docker run -it --rm \
   ryjer/drone-rclone
 ```
 
-## copy 复制示例
+### 2 copy 复制示例
 
 如果你不想使用 `sync`子命令删除目标存储中不同的文件，可以使用 `copy` 子命令仅进行复制操作，其结果类似于 `cp` 命令。示例如下：
 
@@ -89,7 +89,7 @@ steps:
     target: /
 ```
 
-## 使用密令（secret）示例
+### 3 使用密令（secret）示例
 
 如果他人也有你的git仓库的访问权限，则使用上述明文 `access_key_id`、`secret_access_key` 和 `bucket` 信息是非常危险的。你需要使用 drone 提供的 `secret` 机制来保护这些信息不被他人看见。
 
@@ -118,9 +118,9 @@ steps:
     target: /
 ```
 
-# 参数解释
+## 1.2 参数解释
 
-## rclone 配置参数
+### 1 rclone 配置参数
 
 以下参数来自 `rclone` 的配置文件，这里建议在本地 rclone 配置调试好后将配置文件（通常是 `~/.config/rclone/rclone.conf` 文件）内的一个配置填入drone.yml 设置中。
 
@@ -144,7 +144,7 @@ secret_access_key = minioadminkey
 endpoint = http://play.minio.io
 ```
 
-## 其他配置参数
+### 2 其他配置参数
 
 | 参数       | 解释                                                         |
 | ---------- | ------------------------------------------------------------ |
@@ -153,7 +153,7 @@ endpoint = http://play.minio.io
 | bucket     | 指定接入点下的存储桶名，请登录存储服务商查询存储桶名         |
 | target     | 目标路径，会以存储桶作为根目录，**不得为空**（`/` 表示存储桶根目录） |
 
-# 腾讯云 COS 示例
+## 1.3 腾讯云 COS 示例
 
 这里以位于**成都**的腾讯云 cos 对象存储桶同步为例，将 git 根目录下 `/public/` 文件夹的内容同步到成都地区的 `website-100000088` 存储桶的根路径 `/` 下。其配置示例如下：
 
@@ -177,9 +177,11 @@ steps:
     target: /
 ```
 
-# 参数取值参照表
 
-## 常见类型（type）取值
+
+## 1.4 参数取值参照表
+
+### 1 常见类型（type）取值
 
 此表仅供参考，而且仅有部分，具体可用取值请参考 [rclone官方文档](https://rclone.org/docs/)
 
@@ -201,7 +203,7 @@ steps:
 | Webdav                                                       | webdav               |
 | seafile                                                      | seafile              |
 
-## 当上表取 S3 时，常见提供商（provider）取值
+### 2 当上表取 S3 时，常见提供商（provider）取值
 
 | 提供商                | 取值（注意大小写） |
 | --------------------- | ------------------ |
@@ -212,4 +214,45 @@ steps:
 | Minio 对象存储        | Minio              |
 | Ceph 对象存储         | ceph               |
 | 其他S3 兼容的对象存储 | Other              |
+
+# 2. 聚合参数版本
+
+以上版本需要通过多个参数详细给出 rclone 中的一个配置，虽然具有通用格式但是很繁琐。
+
+所以，在此提供一个聚合参数的版本 `ryjer/drone-rclone:conf`。该版本对于类似如下的一条 rclone 配置
+
+```bash
+[remotestore]
+type = s3
+provider = Minio
+access_key_id = minioadminid
+secret_access_key = minioadminkey
+endpoint = http://play.minio.io
+```
+
+不再需要 6个配置参数详细给出。而是只使用一个参数 `rclone_config` ，一次性将整个配置条目给出，从而简化配置过程。也就是说，`rclone_config`参数将包含如上 6行 参数信息。
+
+##  2.1 用法示例
+
+通过参数聚合，只需要以下示例即可完成一次 rclone 操作。
+
+```yaml
+kind: pipeline
+name: default
+
+steps:
+- name: rclone sync
+  image: ryjer/drone-rclone:conf
+  settings:
+    rclone_config: 
+      from_secret: rclone_conf
+    subcommand: sync
+    source: /test
+    bucket: test
+    target: /
+```
+
+该示例使用了 `secret`，考虑到一条 rclone 配置中有大量的敏感信息，这里强烈建议使用 `secret`。这需要创建如下所示的包含整条 rclone 配置的 secret。
+
+![add rclone_conf Secret](/images/20210718185028-drone-rclone-conf-secret.png)
 
