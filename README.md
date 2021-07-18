@@ -15,9 +15,9 @@ Drone plugin to upload, remove and sync filesystems and object storage by rclone
 
 本插件用于在 Drone CI 中使用 rclone 工具。你可以使用本插件将文件推送到远端的网盘、网络存储或对象存储（比如 AWS S3、Minio、阿里 OSS、腾讯 COS 等）中。
 
-通常在 Drone 中使用这类存储插件往往是为了进行部署，即将本地文件推送到远端对象存储。因此，本插件暂时只支持rclone中用于向远端对象存储推送的使用方式。如果你
+通常在 Drone 中使用这类存储插件往往是为了进行部署，即将本地文件推送到远端对象存储。因此，本插件暂时只支持rclone中用于向远端对象存储推送的使用方式。
 
-希望本插件支持更多的 子命令功能，可以提交 Issues。
+如果你希望本插件支持更多的 子命令功能，可以提交 Issues。
 
 ## 示例
 
