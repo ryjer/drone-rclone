@@ -18,4 +18,4 @@ WORKDIR /data
 
 ENV XDG_CONFIG_HOME=/config
 
-ENTRYPOINT ["/usr/local/rclone.sh"]
+# ENTRYPOINT ["/usr/local/rclone.sh"]
