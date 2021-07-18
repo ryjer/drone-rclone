@@ -45,5 +45,7 @@ echo "配置文件信息："
 cat ${config_file}
 
 # 执行 rclone 命令
+echo "rclone 命令执行"
+echo "rclone --config ${config_file} ${subcommand} ${source} ${name}:${bucket}${target} -P"
 rclone --config ${config_file} ${subcommand} \
    ${source}    ${name}:${bucket}${target} -P
