@@ -25,7 +25,7 @@ echo "${rclone_config}" > ${config_file}
 # 抽取 配置文件第一行的 name
 name=$(sed -n '1s/\[//; 1s/\]//; 1p' ${config_file})
 
-# 执行 rclone 命令
+# 执行 rclone 命令，以当前工作目录为根目录
 rclone --config ${config_file} ${subcommand} \
-    ${source}    ${name}:${bucket}${target} -P
+    ${PWD}${source}    ${name}:${bucket}${target} -P
 

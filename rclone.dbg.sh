@@ -48,4 +48,4 @@ cat ${config_file}
 echo "rclone 命令执行"
 echo "rclone --config ${config_file} ${subcommand} ${source} ${name}:${bucket}${target} -P"
 rclone --config ${config_file} ${subcommand} \
-   ${source}    ${name}:${bucket}${target} -P
+   ${PWD}${source}    ${name}:${bucket}${target} -P
