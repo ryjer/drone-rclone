@@ -17,13 +17,6 @@ source=${PLUGIN_SOURCE}
 target=${PLUGIN_TARGET}
 
 #向配置文件中注入配置
-echo "环境变量 XDG_CONFIG_HOME=${XDG_CONFIG_HOME}"
-echo "根目录信息："
-ls -a /
-#touch ${config_file}
-echo "创建配置目录后："
-ls ${XDG_CONFIG_HOME}
-echo "向配置文件注入配置"
 echo "[${name}]" > ${config_file}
 echo "type = ${type}" >> ${config_file}
 echo "provider = ${provider}" >> ${config_file}
