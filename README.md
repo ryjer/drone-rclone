@@ -19,7 +19,7 @@ Drone plugin to upload, remove and sync filesystems and object storage by rclone
 
 如果你希望本插件支持更多的 子命令功能，可以提交 Issues。
 
-## 示例
+## sync 同步示例
 
 以下示例用于将由 git 仓库中刚刚生成的 `/public/` 文件夹同步（`sync`）到远端的 minio 对象存储的 `website-107893044`存储桶根路径（`/`）下。
 
@@ -63,6 +63,8 @@ docker run -it --rm \
   ryjer/drone-rclone
 ```
 
+## copy 复制示例
+
 如果你不想使用 `sync`子命令删除目标存储中不同的文件，可以使用 `copy` 子命令仅进行复制操作，其结果类似于 `cp` 命令。示例如下：
 
 ```yaml
@@ -82,6 +84,35 @@ steps:
     secret_access_key: minioadminkey
     endpoint: http://play.minio.io
     bucket: website-107893044
+    target: /
+```
+
+## 使用密令（secret）示例
+
+如果他人也有你的git仓库的访问权限，则使用上述明文 `access_key_id`、`secret_access_key` 和 `bucket` 信息是非常危险的。你需要使用 drone 提供的 `secret` 机制来保护这些信息不被他人看见。
+
+secret 的具体使用方法请参考官方文档 [Per Repository | Drone Secret](https://docs.drone.io/secret/repository/)
+
+```yaml
+kind: pipeline
+name: default
+
+steps:
+- name: rclone deploy
+  image: ryjer/drone-rclone
+  settings:
+    subcommand: sync
+    source: /public/
+    name: remotestore
+    type: s3
+    provider: Minio
+    access_key_id: 
+      from_secret: rclone_access_key_id
+    secret_access_key: 
+      from_secret: rclone_secret_access_key
+    endpoint: http://play.minio.io
+    bucket: 
+      from_secret: rclone_bucket
     target: /
 ```
 
