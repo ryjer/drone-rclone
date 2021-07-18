@@ -9,6 +9,8 @@ Drone plugin to upload, remove and sync filesystems and object storage by rclone
 
 用于对文件系统和对象存储进行上传、删除和同步等操作的drone rclone插件
 
+
+
 # 用法
 
 本插件用于在 Drone CI 中使用 rclone 工具。你可以使用本插件将文件推送到远端的网盘、网络存储或对象存储（比如 AWS S3、Minio、阿里 OSS、腾讯 COS 等）中。
@@ -19,7 +21,7 @@ Drone plugin to upload, remove and sync filesystems and object storage by rclone
 
 ## 示例
 
-以下示例用于将由 git 仓库中刚刚生成的 ==/public/== 文件夹同步（==sync==）到远端的 minio 对象存储的 ==website-107893044==存储桶根路径（==/==）下。
+以下示例用于将由 git 仓库中刚刚生成的 `/public/` 文件夹同步（`sync`）到远端的 minio 对象存储的 `website-107893044`存储桶根路径（`/`）下。
 
 **注意：**同步过程不会同步**空文件夹**，同时会**删除**目标路径下**不存在**于源路径中的文件。
 
@@ -61,7 +63,7 @@ docker run -it --rm \
   ryjer/drone-rclone
 ```
 
-如果你不想 ==sync== 子命令删除目标存储中不同的文件，可以使用 ==copy== 子命令仅仅进行复制操作，其结果类似于 ==cp== 命令。示例如下：
+如果你不想使用 `sync`子命令删除目标存储中不同的文件，可以使用 `copy` 子命令仅进行复制操作，其结果类似于 `cp` 命令。示例如下：
 
 ```yaml
 kind: pipeline
@@ -87,7 +89,7 @@ steps:
 
 ## rclone 配置参数
 
-以下参数来自 ==rclone== 的配置文件，这里建议在本地 rclone 配置调试好后将配置文件（通常位于 ==~/.config/rclone/rclone.conf== 文件中）内的一个配置填入drone.yml 设置中。
+以下参数来自 `rclone` 的配置文件，这里建议在本地 rclone 配置调试好后将配置文件（通常是 `~/.config/rclone/rclone.conf` 文件）内的一个配置填入drone.yml 设置中。
 
 | 参数              | 解释                                                         |
 | ----------------- | ------------------------------------------------------------ |
@@ -96,7 +98,7 @@ steps:
 | provider          | 提供商                                                       |
 | access_key_id     | 密钥ID，不同的厂商有不同的叫法                               |
 | secret_access_key | 密钥Key，不同的厂商有不同的叫法                              |
-| endpoint          | 接入点，远端存储的网址，通常与地域有关。如果不指定协议，默认为 ==https==。 |
+| endpoint          | 接入点，远端存储的网址，通常与地域有关。如果不指定协议，默认为 `https`。 |
 
 上方示例设置中的以上参数，对用于 rclone.conf 配置文件中的一个配置如下，请注意一一对应。
 
@@ -113,14 +115,14 @@ endpoint = http://play.minio.io
 
 | 参数       | 解释                                                         |
 | ---------- | ------------------------------------------------------------ |
-| subcommand | rclone 的子命令，暂时只支持 ==sync== 和 ==copy==             |
-| source     | 源路径，会以 git 仓库目录作为根目录。**不能为空**（==/== 表示git仓库根目录） |
+| subcommand | rclone 的子命令，暂时只支持 `sync` 和 `copy`                 |
+| source     | 源路径，会以 git 仓库目录作为根目录。**不能为空**（`/` 表示git仓库根目录） |
 | bucket     | 指定接入点下的存储桶名，请登录存储服务商查询存储桶名         |
-| target     | 目标路径，会以存储桶作为根目录，**不得为空**（==/== 表示存储桶根目录） |
+| target     | 目标路径，会以存储桶作为根目录，**不得为空**（`/` 表示存储桶根目录） |
 
 # 腾讯云 COS 示例
 
-这里以位于**成都**的腾讯云 cos 对象存储桶同步为例，将 git 根目录下 ==/public/== 文件夹的内容同步到成都地区的 ==website-100000088== 存储桶的根路径==/== 下。其配置示例如下：
+这里以位于**成都**的腾讯云 cos 对象存储桶同步为例，将 git 根目录下 `/public/` 文件夹的内容同步到成都地区的 `website-100000088` 存储桶的根路径 `/` 下。其配置示例如下：
 
 ```yaml
 kind: pipeline
