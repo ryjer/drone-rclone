@@ -47,5 +47,5 @@ cat ${config_file}
 # 执行 rclone 命令
 echo "rclone 命令执行"
 echo "rclone --config ${config_file} ${subcommand} ${source} ${name}:${bucket}${target} -P"
-rclone --config ${config_file} ${subcommand} \
-   ${PWD}${source}    ${name}:${bucket}${target} -P
+rclone --config ${config_file} ${subcommand} -vv \
+   ${PWD}${source}    ${name}:${bucket}${target}

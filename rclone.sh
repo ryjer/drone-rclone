@@ -26,5 +26,5 @@ echo "endpoint = ${endpoint}" >> ${config_file}
 
 # 执行 rclone 命令
 echo "======== ======== rclone 开始 ======== ========"
-rclone --config ${config_file} ${subcommand} \
-   ${PWD}${source}    ${name}:${bucket}${target} -P
+rclone --config ${config_file} ${subcommand} -v \
+   ${PWD}${source}    ${name}:${bucket}${target} 
