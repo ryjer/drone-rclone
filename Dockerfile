@@ -16,7 +16,7 @@ ENV XDG_CONFIG_HOME=/config
 RUN addgroup -g 1009 rclone && \
     adduser -u 1009 -Ds /bin/sh -G rclone rclone && \
     chmod 755 /usr/local/rclone.sh && \
-    mkdir ${XDG_CONFIG_HOME}/rclone
+    mkdir -p ${XDG_CONFIG_HOME}/rclone
 
 # 指定工作目录
 WORKDIR /data
