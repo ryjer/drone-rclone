@@ -262,7 +262,7 @@ steps:
   image: ryjer/drone-rclone:conf
   settings:
     rclone_config: 
-      from_secret: rclone_conf
+      from_secret: rclone_config
     subcommand: sync
     source: /test
     bucket: test
