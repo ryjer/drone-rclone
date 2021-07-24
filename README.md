@@ -231,6 +231,23 @@ endpoint = http://play.minio.io
 ```
 
 不再需要 6个配置参数详细给出。而是只使用一个参数 `rclone_config` ，一次性将整个配置条目给出，从而简化配置过程。也就是说，`rclone_config`参数将包含如上 6行 参数信息。
+更好的效果是，使用聚合参数的版本一次可以给出不止一个配置，而可以给出多个配置，比如像下面的两个配置。从而更自由地使用 rclone 
+
+```bash
+[remotestore]
+type = s3
+provider = Minio
+access_key_id = minioadminid
+secret_access_key = minioadminkey
+endpoint = http://play.minio.io
+
+[remotestore]
+type = s3
+provider = TencentCOS
+access_key_id = 98q23yfhq23hgfuf8afh9u
+secret_access_key = af83hfg7uqy3ufjiq09tg2
+endpoint = cos.ap-huoxing.myqcloud.com
+```
 
 ##  2.1 用法示例
 
